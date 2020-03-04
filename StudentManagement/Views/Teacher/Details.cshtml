@@ -1,13 +1,13 @@
 ﻿@model StudentManagement.Models.Teacher
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Thông tin chi tiết giáo viên";
 }
 
-<h2>Details</h2>
+    <h2>Thông tin chi tiết giáo viên</h2>
 
 <div>
-    <h4>Teacher</h4>
+    <h4>Giáo Viên</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -61,6 +61,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TeacherID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.TeacherID }) |
+    @Html.ActionLink("Quay lại", "TeacherList")
 </p>

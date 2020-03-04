@@ -1,14 +1,14 @@
 ﻿@model StudentManagement.Models.Teacher
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Xoá giáo viên";
 }
 
-<h2>Delete</h2>
+    <h2>Xoá một giáo viên</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Teacher</h4>
+    <h4>Giáo Viên</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -65,8 +65,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Xoá" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại", "TeacherList")
         </div>
     }
 </div>

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<StudentManagement.Models.Teacher>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "TeacherList";
 }
 
-<h2>Index</h2>
+    <h2>Quản Lý Giáo Viên</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm Giáo Viên", "Create")
 </p>
 <table class="table">
     <tr>
@@ -53,9 +53,9 @@
             @Html.DisplayFor(modelItem => item.Gender)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TeacherID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TeacherID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TeacherID })
+            @Html.ActionLink("Sửa", "Edit", new { id=item.TeacherID }) |
+            @Html.ActionLink("Thông tin chi tiết", "Details", new { id=item.TeacherID }) |
+            @Html.ActionLink("Xoá", "Delete", new { id=item.TeacherID })
         </td>
     </tr>
 }

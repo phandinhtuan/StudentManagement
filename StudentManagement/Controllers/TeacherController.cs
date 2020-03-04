@@ -14,8 +14,8 @@ namespace StudentManagement.Controllers
     {
         private StudentManagementDbContext db = new StudentManagementDbContext();
 
-        // GET: Teacher
-        public ActionResult Index()
+        // GET: Teacher/TeacherList
+        public ActionResult TeacherList()
         {
             return View(db.Teachers.ToList());
         }
@@ -52,7 +52,7 @@ namespace StudentManagement.Controllers
             {
                 db.Teachers.Add(teacher);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("TeacherList");
             }
 
             return View(teacher);
@@ -84,7 +84,7 @@ namespace StudentManagement.Controllers
             {
                 db.Entry(teacher).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("TeacherList");
             }
             return View(teacher);
         }
@@ -112,7 +112,7 @@ namespace StudentManagement.Controllers
             Teacher teacher = db.Teachers.Find(id);
             db.Teachers.Remove(teacher);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("TeacherList");
         }
 
         protected override void Dispose(bool disposing)
