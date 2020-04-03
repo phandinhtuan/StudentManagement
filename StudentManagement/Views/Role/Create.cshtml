@@ -1,0 +1,13 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+@{
+    ViewBag.Title = "Thêm nhóm quyền";
+}
+    <h2>Thêm một nhóm quyền:</h2>
+
+@using (Html.BeginForm())
+{
+<p> Nhập tên nhóm quyền:</p>
+
+    @Html.EditorFor(m => m.Name)
+    <input type="submit" value="Tạo nhóm quyền" />
+}

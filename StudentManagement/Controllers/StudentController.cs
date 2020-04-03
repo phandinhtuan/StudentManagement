@@ -17,7 +17,13 @@ namespace StudentManagement.Controllers
         // GET: Student/StudentList
         public ActionResult StudentList()
         {
-            return View(db.Students.ToList());
+            var list = db.Students.ToList();
+            if(list!=null && list.Count>0)
+            {
+                foreach (var item in list)
+                    item.FullName =item.FirstName +" "+ item.LastName;
+            }
+            return View(list);
         }
 
         // GET: Student/Details/5
@@ -52,7 +58,7 @@ namespace StudentManagement.Controllers
             {
                 db.Students.Add(student);
                 db.SaveChanges();
-                return RedirectToAction("StudentList()");
+                return RedirectToAction("StudentList");
             }
 
             return View(student);
@@ -66,6 +72,7 @@ namespace StudentManagement.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Student student = db.Students.Find(id);
+           
             if (student == null)
             {
                 return HttpNotFound();
@@ -78,13 +85,14 @@ namespace StudentManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudentID,FirstName,LastName,Gender,Birthday,Email,PhoneNumber")] Student student)
+        public ActionResult Edit(Student student)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Entry(student).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("StudentList()");
+                return RedirectToAction("StudentList");
             }
             return View(student);
         }

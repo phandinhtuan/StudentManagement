@@ -47,6 +47,9 @@ namespace StudentManagement.Models
         public string PhoneNumber { get; set; }
 
         public virtual ICollection<RegisterCourse> RegisterCourses { get; set; }
+
+        [NotMapped]
+        public string FullName { get; set; }
     }
 
 }
