@@ -1,4 +1,7 @@
-﻿using System.Data.Entity;
+﻿using System.ComponentModel.Design;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Dynamic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -34,5 +37,7 @@ namespace StudentManagement.Models
         public DbSet<ClassRoom> ClassRooms { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<RegisterClassRoom> RegisterClassRooms { get; set; }
+
+        public DbSet<usp_AspNetUserRoles_GetList> usp_AspNetUserRoles_GetLists { get; set; }
     }
 }

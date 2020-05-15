@@ -10,6 +10,7 @@ using System.Web.Security;
 
 namespace StudentManagement.Controllers
 {
+    [Authorize]
     public class RoleController : Controller
     {
         // GET: Role
@@ -42,14 +43,11 @@ namespace StudentManagement.Controllers
                 StudentManagementDbContext context = new StudentManagementDbContext();
                 var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
                 var s = UserManager.GetRoles(user.GetUserId());
-                if (s.Count>0 && s[0].ToString() == "Admin")
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                bool result = false;
+                foreach (var item in s)
+                    if (item == "Admin")
+                        result = true;
+                return result;
             }
             return false;
         }
@@ -93,6 +91,22 @@ namespace StudentManagement.Controllers
             context.Roles.Add(Role);
             context.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public bool isRoleUser(string role)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                StudentManagementDbContext context = new StudentManagementDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var s = UserManager.GetRoles(user.GetUserId());
+                bool result = false;
+                foreach (var item in s)
+                    if (item == role)
+                        result = true;
+                return result;
+            }
+            return false;
         }
     }
 }

@@ -6,10 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using StudentManagement.Models;
 
 namespace StudentManagement.Controllers
 {
+    [Authorize]
     public class TeacherController : Controller
     {
         private StudentManagementDbContext db = new StudentManagementDbContext();
@@ -34,16 +37,22 @@ namespace StudentManagement.Controllers
             }
             return View(teacher);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Teacher/Create
         public ActionResult Create()
         {
+            // quyen tao la role= 1
+            bool isCreatedSv = isRoleUser("Them Giao Vien");
+            if (!isCreatedSv) return View("NoPermission");
+            
             return View();
         }
 
+       
         // POST: Teacher/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "TeacherID,FirstName,LastName,Qualification,Email,PhoneNumber,Gender")] Teacher teacher)
@@ -57,7 +66,7 @@ namespace StudentManagement.Controllers
 
             return View(teacher);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Teacher/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -65,6 +74,9 @@ namespace StudentManagement.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            // quyen tao la role= 1
+            bool isEditSv = isRoleUser("Sua giao vien");
+            if (!isEditSv) return View("NoPermission");
             Teacher teacher = db.Teachers.Find(id);
             if (teacher == null)
             {
@@ -76,6 +88,7 @@ namespace StudentManagement.Controllers
         // POST: Teacher/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "TeacherID,FirstName,LastName,Qualification,Email,PhoneNumber,Gender")] Teacher teacher)
@@ -88,7 +101,7 @@ namespace StudentManagement.Controllers
             }
             return View(teacher);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Teacher/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -96,6 +109,9 @@ namespace StudentManagement.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            // quyen tao la role= 1
+            bool isDeleteSv = isRoleUser("Xoa Giao vien");
+            if (!isDeleteSv) return View("NoPermission");
             Teacher teacher = db.Teachers.Find(id);
             if (teacher == null)
             {
@@ -103,7 +119,7 @@ namespace StudentManagement.Controllers
             }
             return View(teacher);
         }
-
+        [Authorize(Roles = "Admin")]
         // POST: Teacher/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -122,6 +138,22 @@ namespace StudentManagement.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public bool isRoleUser(string role)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                StudentManagementDbContext context = new StudentManagementDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var s = UserManager.GetRoles(user.GetUserId());
+                bool result = false;
+                foreach (var item in s)
+                    if (item == role)
+                        result = true;
+                return result;
+            }
+            return false;
         }
     }
 }
