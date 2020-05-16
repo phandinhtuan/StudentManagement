@@ -272,13 +272,9 @@ C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microso
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.dll
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Host.SystemWeb.dll
-C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.Cookies.dll
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.dll
-C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.Facebook.dll
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.Google.dll
-C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.OAuth.dll
-C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.Twitter.dll
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Newtonsoft.Json.dll
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Owin.dll
@@ -307,11 +303,8 @@ C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microso
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.xml
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.xml
-C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.Facebook.xml
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.Cookies.xml
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.Google.xml
-C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.Twitter.xml
-C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\obj\Debug\StudentManagement.csproj.CopyComplete
@@ -319,3 +312,4 @@ C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\obj\Debug\S
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\obj\Debug\StudentManagement.pdb
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\obj\Debug\StudentManagement.csprojAssemblyReference.cache
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\obj\Debug\StudentManagement.csproj.CoreCompileInputs.cache
+C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.Cookies.dll

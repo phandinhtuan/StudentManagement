@@ -4,7 +4,7 @@ using Microsoft.Owin;
 using Owin;
 using StudentManagement.Models;
 
-[assembly: OwinStartupAttribute(typeof(StudentManagement.Startup))]
+[assembly: OwinStartup(typeof(StudentManagement.Startup))]
 namespace StudentManagement
 {
     public partial class Startup

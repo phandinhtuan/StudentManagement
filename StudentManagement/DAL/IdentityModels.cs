@@ -38,6 +38,6 @@ namespace StudentManagement.Models
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<RegisterClassRoom> RegisterClassRooms { get; set; }
 
-        public DbSet<usp_AspNetUserRoles_GetList> usp_AspNetUserRoles_GetLists { get; set; }
+        //public DbSet<usp_AspNetUserRoles_GetList> usp_AspNetUserRoles_GetLists { get; set; }
     }
 }
