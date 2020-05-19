@@ -33,7 +33,10 @@ namespace StudentManagement.Controllers
         }
         public ActionResult Add()
         {
-           
+            // viet hai service call DB 
+            //1: lay het tat ca user trong he thong
+            //2: lay het tat ca role trong he thong 
+            //cuoi cung dung ViewBag.ListUser,ViewBag.ListRole de truyen len view
             return View();
         }
         [HttpPost]
