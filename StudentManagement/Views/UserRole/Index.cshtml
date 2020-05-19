@@ -1,0 +1,31 @@
+﻿@model IEnumerable<StudentManagement.Models.usp_AspNetUserRoles_GetList>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List phan quyen trong he thong</h2>
+<a href="/UserRole/Add">Them phan quyen</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>User Name</td>
+            <td>Quyen</td>
+            <td>Xoa</td>
+        </tr>
+
+    </thead>
+    <tbody>
+        @if (Model != null )
+        {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserName</td>
+                <td>@item.Name</td>
+                <td><a href="/UserRole/Delete?userId=@item.UserId&roleId=@item.RoleId">Xoa</a></td>
+            </tr>
+        }
+        }
+    </tbody>
+</table>

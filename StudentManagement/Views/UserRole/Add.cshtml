@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input name="UserId" value="" placeholder="Nhap User Name" />
+    <input name="RoleId" value="" placeholder="Nhap ten quyen/role" />
+    <input type="submit" value="Luu" class="btn btn-default" />
+}
