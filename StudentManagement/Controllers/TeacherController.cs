@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using DocumentFormat.OpenXml.Drawing;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using StudentManagement.Models;
@@ -155,5 +156,18 @@ namespace StudentManagement.Controllers
             }
             return false;
         }
+        public ActionResult Search(string Name = "")
+        {
+            var model = db.Teachers.Where(f => f.FirstName.Contains(Name) || f.LastName.Contains(Name)
+            || f.PhoneNumber.Contains(Name) || f.Qualification.Contains(Name)).ToList();
+            return PartialView(model);
+        }
+        //public JsonResult SearchName(string Name = "")
+        //{
+        //    var model = db.Teachers.Where(f => f.FirstName.Contains(Name) || f.LastName.Contains(Name)
+        //    || f.PhoneNumber.Contains(Name) || f.Qualification.Contains(Name)).ToList();
+        //    //var model = db.Teachers.Where(f => f.FirstName.Contains(Name) || f.LastName.Contains(Name)).FirstOrDefault();
+        //    return Json(model, JsonRequestBehavior.AllowGet);
+        //}
     }
 }

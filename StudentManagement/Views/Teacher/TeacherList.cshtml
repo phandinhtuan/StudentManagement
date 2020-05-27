@@ -3,61 +3,107 @@
 @{
     ViewBag.Title = "TeacherList";
 }
+@Scripts.Render("~/bundles/jquery")
+<h2>Quản Lý Giáo Viên</h2>
 
-    <h2>Quản Lý Giáo Viên</h2>
+@*tim kiem giao vien*@
 
+<script>
+    $(document).ready(function () {
+        $("#Search").keyup(function () {
+            var search = $("#Search").val();
+            $.ajax(
+                {
+                    url: "/Teacher/Search",
+                    data: { Name: search },
+                    success: function (response) {
+                        $("p").html("")
+                        $("table").html("");
+                        $("div#result").html(response);
+
+                    }
+
+                }
+            );
+        });
+
+        // Nut nay dc click
+        $("#SearchBtn").click(function () {
+            var search = $("#Search").val();
+            $.ajax(
+                {
+                    url: "/Teacher/Search",
+                    data: { Name: search },
+                    success: function (response) {
+                        $("p").html("")
+                        $("table").html("");
+                        $("div#result").html(response);
+
+                    }
+
+                }
+            );
+        });
+    });
+</script>
+@Html.TextBox("Search")
+<input type="submit" id="SearchBtn" value="Search" />
+<div id="result"></div>
 <p>
     @Html.ActionLink("Thêm Giáo Viên", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Qualification)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Qualification)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.ActionLink("Sửa", "Edit", new { id=item.TeacherID }) |
-            @Html.ActionLink("Thông tin chi tiết", "Details", new { id=item.TeacherID }) |
-            @Html.ActionLink("Xoá", "Delete", new { id=item.TeacherID })
-        </td>
-    </tr>
-}
-
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qualification)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="DataSearching">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qualification)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.TeacherID }) |
+                    @Html.ActionLink("Thông tin chi tiết", "Details", new { id = item.TeacherID }) |
+                    @Html.ActionLink("Xoá", "Delete", new { id = item.TeacherID })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
