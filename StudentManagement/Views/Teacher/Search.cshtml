@@ -1,8 +1,21 @@
 ﻿@model IEnumerable<StudentManagement.Models.Teacher>
 
-<p>
-    @Html.ActionLink("Thêm Giáo Viên", "Create")
-</p>
+@{
+    ViewBag.Title = "TeacherList";
+}
+@Scripts.Render("~/bundles/jquery")
+@*tim kiem giao vien*@
+    <div>
+        <div style="float:left;padding-bottom:10px;">
+            @Html.TextBox("Search")
+            <input type="submit" id="SearchBtn" value="Search" />
+        </div>
+        <div style="float:right;padding-top:10px;">
+            <p class="search_p">
+                @Html.ActionLink("Thêm Giáo Viên", "Create")
+            </p>
+        </div>
+    </div>
 <table class="table table-bordered">
     <thead>
         <tr>
