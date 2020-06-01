@@ -5,13 +5,11 @@
 }
 @Scripts.Render("~/bundles/jquery")
 @*tim kiem giao vien*@
-    <div>
-        <div style="float:right;padding-top:10px;">
-            <p class="search_p">
-                @Html.ActionLink("Thêm Giáo Viên", "Create")
-            </p>
-        </div>
-    </div>
+<div style="float:right; padding-bottom:10px;">
+    <p>
+        @Html.ActionLink("Thêm Giáo Viên", "Create", "Teacher", new { @class = "btn btn-info" })
+    </p>
+</div>
 <table class="table table-bordered">
     <thead>
         <tr>

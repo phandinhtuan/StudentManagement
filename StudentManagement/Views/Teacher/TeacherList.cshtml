@@ -53,14 +53,16 @@
     });
 </script>
 
-<div >
-    <div style="float:left;padding-bottom:10px;">
-        @Html.TextBox("Search")
-        <input type="submit" id="SearchBtn" value="Search" />
+<div>
+    <div style="float:left; padding-bottom:10px;" >
+        <input id="Search" type="text" class="form-control" placeholder="Tìm kiếm giáo viên" style="border-bottom-right-radius:inherit;border-top-right-radius:inherit;">
     </div>
-    <div style="float:right;padding-top:10px;">
-        <p class="search_p">
-            @Html.ActionLink("Thêm Giáo Viên", "Create")
+    <div style="float:left; padding-bottom:10px;">
+        <input type="submit" id="SearchBtn" value="Tìm Kiếm" class="btn btn-info" style="border-bottom-left-radius:initial; border-top-left-radius:inherit;" />
+    </div>
+    <div style="float:right; padding-bottom:10px;">
+        <p>
+            @Html.ActionLink("Thêm Giáo Viên", "Create", "Teacher", new { @class = "btn btn-info" })
         </p>
     </div>
 </div>
