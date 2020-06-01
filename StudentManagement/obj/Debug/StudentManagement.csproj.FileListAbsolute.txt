@@ -313,3 +313,7 @@ C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\obj\Debug\S
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\obj\Debug\StudentManagement.csprojAssemblyReference.cache
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\obj\Debug\StudentManagement.csproj.CoreCompileInputs.cache
 C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\DocumentFormat.OpenXml.dll
+C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\System.IO.Packaging.dll
+C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\DocumentFormat.OpenXml.xml
+C:\Users\Tuanpd\OneDrive\Desktop\StudentManagement\StudentManagement\bin\System.IO.Packaging.xml

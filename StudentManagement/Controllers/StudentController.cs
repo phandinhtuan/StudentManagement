@@ -21,11 +21,12 @@ namespace StudentManagement.Controllers
         public ActionResult StudentList()
         {
             var list = db.Students.ToList();
-            if(list!=null && list.Count>0)
-            {
-                foreach (var item in list)
-                    item.FullName =item.FirstName +" "+ item.LastName;
-            }
+            //if (list != null && list.Count > 0)
+            //{
+
+            //    foreach (var item in list)
+            //        item.FullName = item.FirstName + " " + item.LastName;
+            //}
             return View(list);
         }
 
@@ -43,7 +44,7 @@ namespace StudentManagement.Controllers
             }
             return View(student);
         }
-        
+
         // GET: Student/Create
         public ActionResult Create()
         {
@@ -56,7 +57,7 @@ namespace StudentManagement.Controllers
         // POST: Student/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "StudentID,FirstName,LastName,Gender,Birthday,Email,PhoneNumber")] Student student)
@@ -70,7 +71,7 @@ namespace StudentManagement.Controllers
 
             return View(student);
         }
-       
+
         // GET: Student/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -84,7 +85,7 @@ namespace StudentManagement.Controllers
             if (!isEditSv) return View("NoPermission");
 
             Student student = db.Students.Find(id);
-           
+
             if (student == null)
             {
                 return HttpNotFound();
@@ -95,7 +96,7 @@ namespace StudentManagement.Controllers
         // POST: Student/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Student student)
@@ -164,6 +165,12 @@ namespace StudentManagement.Controllers
                 return result;
             }
             return false;
+        }
+        public ActionResult Search(string Name = "")
+        {
+            var model = db.Students.Where(f => f.FirstName.Contains(Name) || f.LastName.Contains(Name)
+            || f.Gender.Contains(Name) || f.Email.Contains(Name) || f.PhoneNumber.Contains(Name)).ToList();
+            return PartialView(model);
         }
     }
 }

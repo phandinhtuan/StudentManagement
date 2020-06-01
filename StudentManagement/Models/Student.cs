@@ -49,7 +49,10 @@ namespace StudentManagement.Models
         public virtual ICollection<RegisterCourse> RegisterCourses { get; set; }
 
         [NotMapped]
-        public string FullName { get; set; }
+        [DisplayName("Họ Và Tên")]
+        public string FullName {
+            get { return FirstName + " " + LastName; }         
+        }
     }
 
 }

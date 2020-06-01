@@ -20,7 +20,7 @@ namespace StudentManagement.Controllers
            var model= context.Teachers.Where(f => f.FirstName.Contains(Name) || f.LastName.Contains(Name)).ToList();
             return PartialView(model);
         }
-        public ActionResult SearchName(string Name = "")
+        public JsonResult SearchName(string Name = "")
         {
             var model = context.Teachers.Where(f => f.FirstName.Contains(Name) || f.LastName.Contains(Name)).FirstOrDefault();
             return Json(model,JsonRequestBehavior.AllowGet);

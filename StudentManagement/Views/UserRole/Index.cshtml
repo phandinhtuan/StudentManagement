@@ -1,31 +1,117 @@
 ﻿@model IEnumerable<StudentManagement.Models.usp_AspNetUserRoles_GetList>
+
+@*@using StudentManagement.Model*@s
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@Scripts.Render("~/bundles/jquery")
 <h2>List phan quyen trong he thong</h2>
-<a href="/UserRole/Add">Them phan quyen</a>
+<div>
+    <input class="form-control" id="Search" placeholder="Tìm kiếm người dùng" />
+    <div id="result"></div>
+    @*<div id="result1" style="display:none">
+        <input username="UserName" id="UserName" value="" />
+        <input name="Name" id="Name" value="" />
+    </div>*@
+    
+</div>
+<button type="button" class="glyphicon-search">Tìm Kiếm</button>
 <table class="table table-bordered">
-    <thead>
-        <tr>
-            <td>User Name</td>
-            <td>Quyen</td>
-            <td>Xoa</td>
-        </tr>
 
-    </thead>
     <tbody>
-        @if (Model != null )
+        @if (Model != null)
         {
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.UserName</td>
-                <td>@item.Name</td>
-                <td><a href="/UserRole/Delete?userId=@item.UserId&roleId=@item.RoleId">Xoa</a></td>
-            </tr>
-        }
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td>@item.Name</td>
+                    <td><a href="/UserRole/Delete?userId=@item.UserId&roleId=@item.RoleId">Xoa</a></td>
+                </tr>
+            }
         }
     </tbody>
 </table>
+<a href="/UserRole/Add">Them phan quyen</a>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Thêm Phân Quyền
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm một phân quyền</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                @*@using (Html.BeginForm("Add","Index",FormMethod.Post, new { @class = "modal-form" }) )
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <div class="col-md-10">
+
+                                @
+                        </div>Html.DropDownList("UserId", (IEnumerable<SelectListItem>)ViewBag.userListDb, new { @class = "form-control" })
+                                @Html.DropDownList("RoleId", (IEnumerable<SelectListItem>)ViewBag.listRoles, new { @class = "form-control" })
+                            </div>
+
+
+
+                    }*@
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <input type="submit" value="Luu" class="btn btn-default" />
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#Search").keyup(function () {
+            var search = $("#Search").val();
+            $.ajax(
+                {
+                    url: "/UserRole/Search",
+                    data: { Name: search },
+                    success: function (response) {
+                        $("div#result").html(response);
+                    }
+
+                }
+            );
+        });
+
+       // Nut nay dc click
+        $(":button").click(function () {
+            var search = $("#Search").val();
+            $.ajax(
+                {
+                    url: "/UserRole/SearchName",
+                    data: { Name: search },
+                    success: function (response) {
+                        if (response) {
+                            $("div#result").show();
+                            $("#UserName").val(response.UserName);
+                            $("#Name").val(response.Name);
+                        }
+
+                    }
+
+                }
+            );
+        });
+
+    });
+</script>

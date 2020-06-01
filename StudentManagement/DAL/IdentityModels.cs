@@ -4,6 +4,7 @@ using System.Data.Entity.Core.Objects;
 using System.Dynamic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DocumentFormat.OpenXml.ExtendedProperties;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -40,7 +41,8 @@ namespace StudentManagement.Models
 
         public System.Data.Entity.DbSet<StudentManagement.Models.usp_AspNetUser_GetList> usp_AspNetUser_GetList { get; set; }
 
-        public System.Data.Entity.DbSet<StudentManagement.Models.ApplicationUser> ApplicationUsers { get; set; }
+        //public System.Data.Entity.DbSet<StudentManagement.Models.ApplicationUser> ApplicationUsers { get; set; }
+
 
         //public DbSet<AspNetUser> AspNetUsers { get; set; }
     }

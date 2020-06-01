@@ -4,33 +4,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Scripts.Render("~/bundles/jquery")
-<input class="form-control" id="Search" />
-<div id="result"></div>
+<div>
+    <div style="float:left;">
+        <button type="button"> Tim giao vien</button>
+    </div>
+    <div style="float:left;">
+        <input class="form-control" id="Search" />
+        <div id="result" style="float:left;"></div>
+        @*<div id="result1" style="display:none">
+                <input name="FirstName" id="FirstName" value="" />
+                <input name="LastName" id="LastName" value="" />
+            </div>*@
 
+    </div>
 
+    @*<div style="clear:both;"></div>*@
+</div>
 
-<div id="result1" style="display:none">
-    <input name="FirstName" id="FirstName" value="" />
-    <input name="LastName" id="LastName" value="" />
-</div> 
-<button type="button"> Tim giao vien</button>
 <script>
     $(document).ready(function () {
-        //$("#Search").keyup(function () {
-        //    var search = $("#Search").val();
-        //    $.ajax(
-        //        {
-        //            url: "/Ajax/Search",
-        //            data: { Name: search },
-        //            success: function (response) {
-        //                $("div#result").html(response);
-        //            }
+        $("#Search").keyup(function () {
+            var search = $("#Search").val();
+            $.ajax(
+                {
+                    url: "/Ajax/Search",
+                    data: { Name: search },
+                    success: function (response) {
+                        $("div#result").html(response);
+                    }
 
-        //        }
-        //    );
-        //});
+                }
+            );
+        });
 
-        // Nut nay dc click 
+        // Nut nay dc click
         $(":button").click(function () {
             var search = $("#Search").val();
             $.ajax(
@@ -39,11 +46,11 @@
                     data: { Name: search },
                     success: function (response) {
                         if (response) {
-                            $("div#result1").show();
+                            $("div#result").show();
                             $("#FirstName").val(response.FirstName);
                             $("#LastName").val(response.LastName);
                         }
-                        
+
                     }
 
                 }
