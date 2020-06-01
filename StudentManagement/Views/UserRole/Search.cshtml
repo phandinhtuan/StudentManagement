@@ -1,0 +1,29 @@
+﻿@model IEnumerable<StudentManagement.Models.usp_AspNetUserRoles_GetList>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        
+        <th></th>
+    </tr>
+
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td>@item.Name</td>
+                    <td><a href="/UserRole/Delete?userId=@item.UserId&roleId=@item.RoleId">Xoa</a></td>
+                </tr>
+            }
+        }
+    </tbody>
+
+</table>
