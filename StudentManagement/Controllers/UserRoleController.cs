@@ -21,21 +21,24 @@ namespace StudentManagement.Controllers
         {
             // cho nay lay doi DB
             List<usp_AspNetUserRoles_GetList> listDB = new List<usp_AspNetUserRoles_GetList>();
+            using (var service = new AspNetUserRolesService())
+            {
+                listDB = service.GetList();
+            }
             //ListUserRole item = new ListUserRole();
             //item.Name = "Test";
             //item.UserId = "Tuanpd";
             //listDB.Add(item);
             //return View(listDB);
-            using (var service = new AspNetUserRolesService())
-            {
-                listDB = service.GetList();
-            }
+            var allUsers = db.Users.ToList();
+           
             // add dropdownlist userrole
             var viewModels = new List<usp_AspNetUser_GetList>();
-            
-            foreach (var user in listDB)
-            {
-                viewModels.Add(new usp_AspNetUser_GetList { Id=user.UserId, UserName = user.UserName });
+            if (allUsers!=null) {
+                foreach (var user in allUsers)
+                {
+                    viewModels.Add(new usp_AspNetUser_GetList { Id = user.Id, UserName = user.UserName });
+                }
             }
             SelectList selectUsers = new SelectList(viewModels,"Id", "UserName");
             ViewBag.userListDb = selectUsers;
@@ -43,11 +46,22 @@ namespace StudentManagement.Controllers
             //ViewBag.ListAllUser = listDB;
             //Chua toan bo Role
             //ViewBag.ListAllRole = "List All Role";         
-            foreach (var user in listDB)
+            //foreach (var user in listDB)
+            //{
+            //    viewModels.Add(new usp_AspNetUser_GetList { Id=user.RoleId,  UserName = user.Name});
+            //}
+            //SelectList selectRoles = new SelectList(viewModels, "Id", "UserName");
+            //ViewBag.listRoles = selectRoles;
+            var Roles = db.Roles.ToList();
+            var viewModelRoles = new List<usp_AspNetUser_GetList>();
+            if (Roles != null)
             {
-                viewModels.Add(new usp_AspNetUser_GetList { Id=user.RoleId,  UserName = user.Name});
+                foreach(var item in Roles)
+                {
+                    viewModelRoles.Add(new usp_AspNetUser_GetList { Id = item.Id, UserName = item.Name });
+                }
             }
-            SelectList selectRoles = new SelectList(viewModels, "Id", "UserName");
+            SelectList selectRoles = new SelectList(viewModelRoles, "Id", "UserName");
             ViewBag.listRoles = selectRoles;
             return View(listDB);
         }
