@@ -1,37 +1,5 @@
 ﻿@model IEnumerable<StudentManagement.Models.Student>
 
-<div style="float:right;padding-bottom:10px;">
-    <p>
-        @Html.ActionLink("Thêm một sinh viên", "Create", "Student", new { @class = "btn btn-info" })
-    </p>
-</div>
-
-<table class="table table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Birthday)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th></th>
-    </tr>
-
     @foreach (var item in Model)
     {
         <tr>
@@ -64,5 +32,5 @@
         </tr>
     }
 
-</table>
+
 

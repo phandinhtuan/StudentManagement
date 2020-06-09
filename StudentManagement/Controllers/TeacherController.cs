@@ -160,7 +160,7 @@ namespace StudentManagement.Controllers
         {
             var model = db.Teachers.Where(f => f.FirstName.Contains(Name) || f.LastName.Contains(Name)
             || f.PhoneNumber.Contains(Name) || f.Qualification.Contains(Name) ||f.Email.Contains(Name) ||f.Gender.Contains(Name)).ToList();
-            return PartialView(model);
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
         //public JsonResult SearchName(string Name = "")
         //{

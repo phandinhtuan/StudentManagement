@@ -6,20 +6,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Scripts.Render("~/bundles/jquery")
-<h2>List phan quyen trong he thong</h2>
-<div>
-    <input class="form-control" id="Search" placeholder="Tìm kiếm người dùng" />
-    <div id="result"></div>
-    @*<div id="result1" style="display:none">
-        <input username="UserName" id="UserName" value="" />
-        <input name="Name" id="Name" value="" />
-    </div>*@
-    
-</div>
-<button type="button" class="glyphicon-search">Tìm Kiếm</button>
-<table class="table table-bordered">
 
-    <tbody>
+<h2>Danh sách tất cả các  quyền trong hệ thống</h2>
+<div>
+    <div style="float:left; padding-bottom:10px;">
+        <input id="Search" type="text" class="form-control" placeholder="Tìm kiếm quyền" style="border-bottom-right-radius:inherit;border-top-right-radius:inherit;">
+    </div>
+    <div style="float:left; padding-bottom:10px;">
+        <input type="submit" id="SearchBtn" value="Tìm Kiếm" class="btn btn-info" style="border-bottom-left-radius:initial; border-top-left-radius:inherit;" />
+    </div>
+    <div style="float:right; padding-bottom:10px;">
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+            Thêm Phân Quyền
+        </button>
+    </div>
+</div>
+<table class="table table-bordered">
+    <tbody id="DataSearching">
         @if (Model != null)
         {
             foreach (var item in Model)
@@ -33,11 +36,6 @@
         }
     </tbody>
 </table>
-<a href="/UserRole/Add">Them phan quyen</a>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-    Thêm Phân Quyền
-</button>
-
 <!-- The Modal -->
 <div class="modal" id="myModal">
     <div class="modal-dialog">
@@ -51,25 +49,30 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                @*@using (Html.BeginForm("Add","Index",FormMethod.Post, new { @class = "modal-form" }) )
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="form-group">
-                            <div class="col-md-10">
+                @using (Html.BeginForm("Add", "Index", FormMethod.Post, new { @class = "modal-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                <div class="form-group" style="display:flex;">
+                    <div>
 
-                                @
-                        </div>Html.DropDownList("UserId", (IEnumerable<SelectListItem>)ViewBag.userListDb, new { @class = "form-control" })
-                                @Html.DropDownList("RoleId", (IEnumerable<SelectListItem>)ViewBag.listRoles, new { @class = "form-control" })
-                            </div>
+                        @Html.DropDownList("UserId", (IEnumerable<SelectListItem>)ViewBag.userListDb, new { @class = "form-control" })
+                    </div>
+                    <div >
+
+                        @Html.DropDownList("RoleId", (IEnumerable<SelectListItem>)ViewBag.listRoles, new { @class = "form-control" })
+                    </div>
+                    
+                </div>
 
 
 
-                    }*@
+                }
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <input type="submit" value="Luu" class="btn btn-default" />
+                <button type="submit" class="btn btn-info">Thêm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
             </div>
 
         </div>
@@ -86,7 +89,17 @@
                     url: "/UserRole/Search",
                     data: { Name: search },
                     success: function (response) {
-                        $("div#result").html(response);
+                        $("tbody#DataSearching").html("");
+                        $(response).each(function (i, e)
+                        {
+                            var tr = $("<tr/>");
+                            $("<td/>").html(e.UserName).appendTo(tr);
+                            $("<td/>").html(e.Name).appendTo(tr);
+                            @*<a href="/UserRole/Delete?userId=@item.UserId&roleId=@item.RoleId">Xoa</a>*@
+                            //'<a href="/viewteam/' + team.id + '">View Team</a>
+                            $("<td/>").html('<a href="/UserRole/Delete?userId=e.UserId&roleId=e.RoleId">Xoa</a>').appendTo(tr);
+                            tr.appendTo("tbody#DataSearching");
+                        });
                     }
 
                 }
@@ -101,11 +114,14 @@
                     url: "/UserRole/SearchName",
                     data: { Name: search },
                     success: function (response) {
-                        if (response) {
-                            $("div#result").show();
-                            $("#UserName").val(response.UserName);
-                            $("#Name").val(response.Name);
-                        }
+                        $("tbody#DataSearching").html("");
+                        $(response).each(function (i, e) {
+                            var tr = $("<tr/>");
+                            $("<td/>").html(e.UserName).appendTo(tr);
+                            $("<td/>").html(e.Name).appendTo(tr);
+                            $("<td/>").html('<a href="/UserRole/Delete?userId=e.UserId&roleId=e.RoleId">Xoa</a>').appendTo(tr);
+                            tr.appendTo("tbody#DataSearching");
+                        });
 
                     }
 

@@ -30,7 +30,25 @@ namespace StudentManagement.Controllers
             {
                 listDB = service.GetList();
             }
-
+            // add dropdownlist userrole
+            var viewModels = new List<usp_AspNetUser_GetList>();
+            
+            foreach (var user in listDB)
+            {
+                viewModels.Add(new usp_AspNetUser_GetList { Id=user.UserId, UserName = user.UserName });
+            }
+            SelectList selectUsers = new SelectList(viewModels,"Id", "UserName");
+            ViewBag.userListDb = selectUsers;
+            // chua toan nhan vien
+            //ViewBag.ListAllUser = listDB;
+            //Chua toan bo Role
+            //ViewBag.ListAllRole = "List All Role";         
+            foreach (var user in listDB)
+            {
+                viewModels.Add(new usp_AspNetUser_GetList { Id=user.RoleId,  UserName = user.Name});
+            }
+            SelectList selectRoles = new SelectList(viewModels, "Id", "UserName");
+            ViewBag.listRoles = selectRoles;
             return View(listDB);
         }
         public ActionResult Add()
@@ -68,7 +86,7 @@ namespace StudentManagement.Controllers
             SelectList selectRoles = new SelectList(viewRoles, "Id", "UserName");
             ViewBag.listRoles = selectRoles;
             //cuoi cung dung ViewBag.ListUser,ViewBag.ListRole de truyen len view
-            return View();
+            return RedirectToAction("Indexs") ;
         }
         [HttpPost]
         public ActionResult Add(UserRole userRole)
@@ -97,7 +115,7 @@ namespace StudentManagement.Controllers
             // Lam sao lu DB
             return RedirectToAction("Index");
         }
-        public ActionResult Delete(string userId, string roleId)
+        public JsonResult Delete(string userId, string roleId)
         {
             // chua viet gi
             //service Call DB
@@ -106,25 +124,20 @@ namespace StudentManagement.Controllers
             {
                 result = service.DeleteUserRole(userId, roleId);
             }
-            return RedirectToAction("Index");
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Search(string Name = "")
+        public JsonResult Search(string Name = "")
         {
            List<usp_AspNetUserRoles_GetList> listDB = new List<usp_AspNetUserRoles_GetList>();
+            using (var service = new AspNetUserRolesService())
+            {
+                listDB = service.GetList();
+            }
 
-            var model = listDB.Where(u => u.UserName.Contains(Name) || u.Name.Contains(Name)).ToList();
+            var model = listDB.Where(u => u.UserName.Contains(Name) || u.Name.Contains(Name)).Select(u => new { UserName = u.UserName, Name = u.Name,UserId=u.UserId,RoleId=u.RoleId }).ToList() ;
 
-            return PartialView(model);
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
-        public ActionResult SearchName(string Name = "")
-        {
-
-            List<usp_AspNetUserRoles_GetList> listDB = new List<usp_AspNetUserRoles_GetList>();
-
-
-            var model = listDB.Where(u => u.UserName.Contains(Name) || u.Name.Contains(Name)).FirstOrDefault();
-           
-            return Json(model, JsonRequestBehavior.AllowGet);
-        }
+        
     }
 }
