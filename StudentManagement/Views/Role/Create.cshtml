@@ -2,12 +2,17 @@
 @{
     ViewBag.Title = "Thêm nhóm quyền";
 }
-    <h2>Thêm một quyền:</h2>
+<h2>Thêm một quyền:</h2>
 
 @using (Html.BeginForm())
 {
-<p> Nhập tên quyền:</p>
+    <p> Nhập tên quyền</p>
 
-    @Html.EditorFor(m => m.Name)
-    <input type="submit" value="Thêm Quyền" />
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+    @*@Html.EditorFor(m => m.Name)*@
+    <input type="submit" value="Thêm Quyền" class="btn btn-info" />
+
 }
